@@ -2,6 +2,7 @@
     "name": "IS6750 - Spring2026",
     "image": "node:22-bookworm",
     "remoteUser": "node",
+    "updateRemoteUserUID": true,
     "forwardPorts": [3000, 5173],
     "customizations": {
         "vscode": {
