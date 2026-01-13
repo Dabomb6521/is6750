@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Board</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header class="main-header">
+        <div class="container header-content">
+            <div class="logo">
+                <h1>Job<span class="highlight">Finder</span></h1>
+            </div>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="index.html" class="active">Jobs</a></li>
+                    <li><a href="applications.html">Applications</a></li>
+                    <li><a href="profile.html">Profile</a></li>
+                </ul>
+            </nav>
+            <div class="user-profile">
+                <span class="user-initials">JD</span>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero-section">
+            <div class="container">
+                <h2>Find Your Next Opportunity</h2>
+                <div class="search-container">
+                    <input type="text" id="searchInput" placeholder="Search by job title, skill, or keyword">
+                    <input type="text" id="locationInput" placeholder="Location (e.g., Logan, UT)">
+                    <button id="searchBtn">Search</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-section container">
+            <aside class="filters-sidebar">
+                <h3>Filters</h3>
+                <div class="filter-group">
+                    <h4>Job Type</h4>
+                    <label><input type="checkbox" value="Full-Time"> Full-Time</label>
+                    <label><input type="checkbox" value="Part-Time"> Part-Time</label>
+                    <label><input type="checkbox" value="Remote"> Remote</label>
+                    <label><input type="checkbox" value="Internship"> Internship</label>
+                </div>
+                <!-- More filters can go here -->
+            </aside>
+
+            <div class="job-results-area">
+                <div class="results-header">
+                    <h3 id="resultCount">Showing 0 Jobs</h3>
+                    <div class="sort-options">
+                        <label for="sortSelect">Sort by:</label>
+                        <select id="sortSelect">
+                            <option value="newest">Newest</option>
+                            <option value="relevance">Relevance</option>
+                        </select>
+                    </div>
+                </div>
+                <div id="jobList" class="job-list">
+                    <!-- Job Cards injected here -->
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="main-footer">
+        <div class="container">
+            <p>&copy; 2026 JobFinder. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Job Details Modal -->
+    <div id="jobModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <div id="modalBody"></div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+
+</html>
