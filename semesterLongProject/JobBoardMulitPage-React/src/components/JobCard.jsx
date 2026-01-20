@@ -1,17 +1,26 @@
-const JobCard = ({ title, company, location, type }) => {
+import React from "react";
+
+const JobCard = ({
+  id,
+  title,
+  company,
+  location,
+  type,
+  posted,
+  description,
+  requirements,
+  ...props
+}) => {
   return (
-    <div className="job-card">
+    <div className="job-card" {...props}>
       <h4>{title}</h4>
       <div className="company-name">{company}</div>
       <div className="job-meta">
         <span>📍 {location}</span>
         <span>💼 {type}</span>
-        <span>🕒 2 days ago</span>
+        <span>🕒 {posted}</span>
       </div>
-      <p className="job-snippet">
-        We are looking for a skilled Frontend Developer to join our team. You
-        will be responsible for buildi...
-      </p>
+      <p className="job-snippet">{description}</p>
       <button className="apply-btn-sm">View Details</button>
     </div>
   );
