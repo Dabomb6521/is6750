@@ -6,7 +6,7 @@ const JobResultsArea = ({ children, num }) => {
       <div className="results-header">
         <h3 id="resultCount">Showing {num} Jobs</h3>
         <div className="sort-options">
-          <label for="sortSelect">Sort by:</label>
+          <label htmlFor="sortSelect">Sort by:</label>
           <select id="sortSelect">
             <option value="newest">Newest</option>
             <option value="relevance">Relevance</option>

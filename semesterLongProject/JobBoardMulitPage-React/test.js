@@ -1,22 +1,15 @@
-// first Task
+// const extendedWarrenty = (name)=>{
+//     console.log(`Hi ${name}. We've been trying to reach you about your car's extended warrenty`);
+// }
 
-const Warranty = (name) => {
-  console.log(`Hi ${name}. We've been trying to reach you about your cars extended warranty`);
-};
+// extendedWarrenty("Toa")
 
-Warranty('Brayden');
+function itsOver(name){
+    return `It's over, ${name}, I have the high ground`
+}
 
+function apply(nameArray,func){
+    return nameArray.map(name=>func(name));
+}
 
-// Second Task
-
-const highGround = (name) => {
-  return `Its over, ${name}, I have the high ground`;
-};
-const applyArray = (namesArray, func) => {
-  return namesArray.map(name => func(name));
-};
-
-const names = ['Anakin', 'Obi-Wan', 'Padme', 'Yoda'];
-const results = applyArray(names, highGround);
-console.log(results);
-
+console.log(apply(["C3P0","R2D2","JarJar"]))

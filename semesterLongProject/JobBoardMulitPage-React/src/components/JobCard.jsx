@@ -1,16 +1,6 @@
 import React from "react";
 
-const JobCard = ({
-  id,
-  title,
-  company,
-  location,
-  type,
-  posted,
-  description,
-  requirements,
-  ...props
-}) => {
+const JobCard = ({id,title,company,location,type,posted,description,requirements,...props}) => {
   return (
     <div className="job-card" {...props}>
       <h4>{title}</h4>
@@ -20,7 +10,9 @@ const JobCard = ({
         <span>💼 {type}</span>
         <span>🕒 {posted}</span>
       </div>
-      <p className="job-snippet">{description}</p>
+      <p className="job-snippet">
+       {description}
+      </p>
       <button className="apply-btn-sm">View Details</button>
     </div>
   );

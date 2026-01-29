@@ -1,4 +1,4 @@
-const Header = () => {
+const Header = ({updatePage}) => {
   return (
     <header className="main-header">
       <div className="container header-content">
@@ -10,15 +10,15 @@ const Header = () => {
         <nav className="main-nav">
           <ul>
             <li>
-              <a href="index.html" className="active">
+              <a href="#" className="active" onClick={()=>updatePage("home")}>
                 Jobs
               </a>
             </li>
             <li>
-              <a href="applications.html">Applications</a>
+              <a href="#" onClick={()=>updatePage("applications")}>Applications</a>
             </li>
             <li>
-              <a href="profile.html">Profile</a>
+              <a href="#" onClick={()=>updatePage("profile")}>Profile</a>
             </li>
           </ul>
         </nav>
