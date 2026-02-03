@@ -1,14 +1,16 @@
 import { TextField, Grid, Button } from "@mui/material";
-import { useRef, useState } from "react";
+import { useRef, use } from "react";
+import ProfileContext from "../store/ProfileContext";
 
 let counter = 0;
 const Profile = () => {
+
+  const {profileHistory:history, setProfileHistory:setHistory} = use(ProfileContext)
 
     const fullNameRef = useRef();
     const emailRef = useRef();
     const titleRef = useRef();
     const bioRef = useRef();
-    const [history,setHistory] = useState([]);
     
     const updateHistory = ()=>{
       setHistory(old=>([...old,{
