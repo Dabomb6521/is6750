@@ -1,6 +1,9 @@
+import { use } from "react"
+import ProfileContext from "../../store/ProfileContext"
 
 
 const MainArea = ({children}) => {
+
   return (
     <main>
         <section className="hero-section">

@@ -5,8 +5,7 @@ import ProfileContext from "../store/ProfileContext";
 let counter = 0;
 const Profile = () => {
 
-  const {profileHistory:history, setProfileHistory:setHistory} = use(ProfileContext)
-
+    const {profileHistory:history,setProfileHistory:setHistory} = use(ProfileContext)
     const fullNameRef = useRef();
     const emailRef = useRef();
     const titleRef = useRef();
@@ -25,7 +24,7 @@ const Profile = () => {
       titleRef.current.value = "";
       bioRef.current.value = "";
 
-      fullNameRef.current.focus()
+      fullNameRef.current.focus();
     }
     
     console.log("Rendering for the "+ ++counter + " time")
