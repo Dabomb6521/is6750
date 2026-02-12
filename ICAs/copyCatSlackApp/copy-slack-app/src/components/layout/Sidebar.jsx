@@ -1,32 +1,58 @@
-import { useState, useEffect } from "react";
-import axios from "axios";
+// Sidebar.jsx
+import { useContext } from "react";
+import {
+  Drawer,
+  List,
+  ListItemText,
+  Toolbar,
+  Divider,
+  ListItemIcon,
+  ListItemButton,
+} from "@mui/material";
 
-const channelURL = 'https://slackclonebackendapi.onrender.com/channels'
+import { Mail, MailLock } from "@mui/icons-material";
+import { MessagesContext } from "../../store/MessagesStore";
+
+const drawerWidth = 240;
 
 const Sidebar = () => {
-  const [channels, setChannels] = useState([]);
-  // const [users, setUsers] = useState([]);
-
-  const channelData = async () => {
-    try {
-      const getChannels = await axios.get(channelURL);
-      setChannels(channelData.data)
-      console.log(`Data Retrieved: ${getChannels.data}`);
-    } catch (err) {
-      console.error("Error:", err);
-    }
-  };
-
-  useEffect(() => {
-    channelData();
-  }, []);
+  const { channels, currentChannel, setCurrentChannel } =
+    useContext(MessagesContext);
 
   return (
-    <div className="sidebar">
-      <h1>Design Team</h1>
-      <p>Channels Go Here</p>
-      {channels}
-    </div>
+    <>
+      <Drawer
+        variant="permanent"
+        sx={{
+          width: drawerWidth,
+          flexShrink: 0,
+          display: { xs: "none", sm: "block" },
+          "& .MuiDrawer-paper": {
+            width: drawerWidth,
+            boxSizing: "border-box",
+          },
+        }}
+      >
+        <Toolbar>User Toggle Here</Toolbar>
+        <Divider />
+        <List>
+          {/* Display all channels and allow updating */}
+          {channels.map((item) => (
+            <ListItemButton
+              key={item.id}
+              selected={currentChannel === item.id}
+              onClick={() => setCurrentChannel(item.id)}
+            >
+              {/* Choose Icon based on channel type */}
+              <ListItemIcon>
+                {item.type === "public" ? <Mail /> : <MailLock />}
+              </ListItemIcon>
+              <ListItemText primary={item.name} />
+            </ListItemButton>
+          ))}
+        </List>
+      </Drawer>
+    </>
   );
 };
 
