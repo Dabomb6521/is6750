@@ -39,7 +39,10 @@ const Home = () => {
   }
 
   async function handleApplyEvent(jobId) {
-    setJobs(jobsList => jobsList.map(val=>val.id=== jobId?{...val,applied:true}:{...val}))
+    setJobs(jobsList => jobsList.map(val=>val.id=== jobId?{...val,applied:true}:
+      
+      
+      {...val}))
     try {
       const data = await updateJob(jobId, {applied: true});
     } catch (error) {
