@@ -1,6 +1,6 @@
 import ProductTile from "./ProductTile";
 
-const ProductList = ({ products, rowClass = "row px-xl-5", colClasses }) => {
+const ProductList = ({ products, rowClass, colClasses }) => {
   return (
     <div className={rowClass}>
       {products.map((product) => (

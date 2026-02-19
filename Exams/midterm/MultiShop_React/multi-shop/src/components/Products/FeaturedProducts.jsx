@@ -50,7 +50,7 @@ const FeaturedProducts = () => {
         <ProductList
           products={products}
           rowClass="row px-xl-5"
-          colClasses="col-lg3 col-md-4 col-sm-6 pb-1"
+          colClasses="col-lg-3 col-md-4 col-sm-6 pb-1"
         />
       )}
     </div>
