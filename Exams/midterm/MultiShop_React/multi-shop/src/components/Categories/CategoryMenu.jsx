@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-import { getCategories } from "../../utils/categoryUtils";
+import { getCategories } from "../../utils/dataUtils";
 
 const CategoryMenu = () => {
   const [categories, setCategories] = useState([]);

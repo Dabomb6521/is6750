@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-import { getAllProducts } from "../../utils/categoryUtils";
+import { getAllProducts } from "../../utils/dataUtils";
 
 const CategoryList = () => {
   const [categories, setCategories] = useState([]);

@@ -1,5 +1,6 @@
 import CategoryList from "./components/Categories/CategoryList";
 import Layout from "./components/Layout/Layout";
+import FeaturedProducts from "./components/Products/FeaturedProducts";
 import ProductTile from "./components/Products/ProductTile"
 
 // Example of using Product Tile from question 5
@@ -14,11 +15,8 @@ function App() {
   return (
     <>
       <Layout>
-        {pathname === '/categories' ? (
-          <CategoryList />
-
-        ) : (<h1>Future Content Here!!</h1>)}
-        
+        {pathname === '/' && <FeaturedProducts />}
+        {pathname === '/categories' && <CategoryList />}
       </Layout>
     </>
   );
