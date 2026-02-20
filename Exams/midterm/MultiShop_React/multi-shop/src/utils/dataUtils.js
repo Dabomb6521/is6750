@@ -19,3 +19,23 @@ export const getAllProducts = async () => {
     throw new Error(error);
   }
 };
+
+export const getProductsByCategory = async (categoryName) => {
+  try {
+    const { data } = await axios.get(
+      `${backendURL}/products/category/${categoryName}`,
+    );
+    return data.products;
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+
+export const getProductById = async (productId) => {
+  try {
+    const { data } = await axios.get(`${backendURL}/products/${productId}`);
+    return data;
+  } catch (error) {
+    throw new Error(error);
+  }
+};

@@ -35,7 +35,7 @@ function NavBar() {
                 <a href="/categories" className="nav-item nav-link">
                   Shop
                 </a>
-                <a href="detail.html" className="nav-item nav-link">
+                <a href="/shop" className="nav-item nav-link">
                   Shop Detail
                 </a>
                 <div className="nav-item dropdown">
