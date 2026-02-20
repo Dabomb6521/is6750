@@ -6,17 +6,19 @@ import Home from "./pages/Home";
 import Profile from "./pages/Profile";
 import ProfileContext from "./store/ProfileContext";
 import { RouterContext } from "./store/RouterContext";
+import { useBackendSync } from "./hooks/useBackendSync";
 
 
 function App() {
 
 const {page} = use(RouterContext);
-const [history,setHistory] = useState([]);
+// const [history,setHistory] = useState([]);
+const [ history, loading, error, deleteFunc] = useBackendSync('http://localhost:5001/profiles')
 
   return (
     <>
     
-    <ProfileContext value={{profileHistory:history,setProfileHistory:setHistory}}>
+    <ProfileContext value={{profileHistory:history, loading, error, deleteFunc}}>
       <Header/>
       <MainArea>
         {page==="home"&&<Home/>}

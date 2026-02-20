@@ -1,11 +1,11 @@
-import { TextField, Grid, Button } from "@mui/material";
+import { TextField, Grid, Button, CircularProgress } from "@mui/material";
 import { useRef, use } from "react";
 import ProfileContext from "../store/ProfileContext";
 
 let counter = 0;
 const Profile = () => {
 
-    const {profileHistory:history,setProfileHistory:setHistory} = use(ProfileContext)
+    const {profileHistory:history,loading, error, deleteFunc} = use(ProfileContext)
     const fullNameRef = useRef();
     const emailRef = useRef();
     const titleRef = useRef();
@@ -53,13 +53,15 @@ const Profile = () => {
         <Button variant="outlined" size="large">Cancel</Button>
       </Grid>
       <Grid container size={12}>
-        {history.map(item=>(
+        {loading && <CircularProgress />}
+        {!loading && history.map(item=>(
         <Grid size={4} key={item.title}>
           <h1>{item.fullName}</h1>
           <h4>{item.title} - {item.email}</h4>
           <p>{item.bio}</p>
         </Grid>
         ))}
+        {!loading && error && <h1>{error.message}</h1>}
 
       </Grid>
     </Grid>

@@ -3,7 +3,9 @@ import { createContext } from "react";
 const ProfileContext = createContext(
     {
         profileHistory:[],
-        setProfileHistory:()=>{},
+        loading: false,
+        error: "",
+        deleteFunc: () => {},
 })
 
 export default ProfileContext;
