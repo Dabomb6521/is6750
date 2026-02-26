@@ -1,28 +1,10 @@
-import { useState, useEffect } from "react";
-
-import { getProductsByCategory } from "../../utils/dataUtils";
+import { useContext } from "react";
+import { ProductContext } from "../../store/product-context";
 import ProductList from "./ProductList";
 
 const ProductsByCategory = ({ categoryName }) => {
-  const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
-
-  useEffect(() => {
-    const fetchCategoryProducts = async () => {
-      setLoading(true);
-      setError(null);
-      try {
-        const data = await getProductsByCategory(categoryName);
-        setProducts(data);
-        setLoading(false);
-      } catch (error) {
-        setError(error);
-        setLoading(false);
-      }
-    };
-    fetchCategoryProducts();
-  }, [categoryName]);
+  const {getProductsByCategory, loading} = useContext(ProductContext);
+  const products = getProductsByCategory(categoryName)
 
   const formatCategoryName = (name) => {
     return name
@@ -42,15 +24,7 @@ const ProductsByCategory = ({ categoryName }) => {
           <div className="spinner-border" role="status"></div>
         </div>
       )}
-
-      {error && (
-        <div className="d-flex justify-content-center">
-          <div className="alert alert-danger mx-xl-5" role="alert" style={{maxWidth: '600px'}}>
-            <strong>Error!</strong> Unable to load products for this category.
-          </div>
-        </div>
-      )}
-      {!loading && !error && (
+      {!loading && (
         <ProductList 
           products={products}
           rowClass="row pb-3"

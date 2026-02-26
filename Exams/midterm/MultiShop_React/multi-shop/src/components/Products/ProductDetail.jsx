@@ -1,37 +1,10 @@
-import { useState, useEffect } from "react";
-import { getProductById } from "../../utils/dataUtils";
+import { useContext } from "react";
+import { ProductContext } from "../../store/product-context";
 
 const ProductDetail = ({productId}) => {
-  console.log("ProductDetail rendered! ProductId: ", productId)
+  const {getProduct, loading} = useContext(ProductContext);
+  const product = getProduct(productId);
 
-  const [product, setProducts] = useState(null);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
-
-  useEffect(() => {
-    console.log("useEffect running!")
-    const fetchProductById = async () => {
-      setLoading(true);
-      setError(null);
-      try {
-        const data = await getProductById(productId);
-        console.log("Product data: ", data)
-        setProducts(data);
-        setLoading(false);
-      } catch (error) {
-        setError(error);
-        setLoading(false);
-      }
-    };
-    fetchProductById();
-  }, [productId]);
-
-  // const formatProductName = (name) => {
-  //   return name
-  //     .split("-")
-  //     .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-  //     .join(" ");
-  // };
   if (loading) {
     return (
       <div className="container-fluid pb-5">
@@ -45,8 +18,7 @@ const ProductDetail = ({productId}) => {
     );
   }
 
-  // Error state
-  if (error) {
+  if (!product) {
     return (
       <div className="container-fluid pb-5">
         <div className="d-flex justify-content-center">
@@ -60,10 +32,6 @@ const ProductDetail = ({productId}) => {
         </div>
       </div>
     );
-  }
-
-  if (!product) {
-    return null;
   }
 
     return (

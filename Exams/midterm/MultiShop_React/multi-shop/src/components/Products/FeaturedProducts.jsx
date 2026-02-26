@@ -1,30 +1,10 @@
-import { useState, useEffect } from "react";
-import { getAllProducts } from "../../utils/dataUtils";
+import { useContext } from "react";
+import { ProductContext } from "../../store/product-context";
 import ProductList from "./ProductList";
 
 const FeaturedProducts = () => {
-  const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
-
-  useEffect(() => {
-    const getAllProductsData = async () => {
-      setLoading(true);
-      setError(null);
-      try {
-        const data = await getAllProducts();
-        const featuredProducts = data.slice(0, 8);
-        setProducts(featuredProducts);
-        setLoading(false);
-      } catch (error) {
-        setError(error);
-        setLoading(false);
-      }
-    };
-
-    getAllProductsData();
-  }, []);
-
+  const {getFeaturedProducts, loading} = useContext(ProductContext);
+  const products = getFeaturedProducts(8);
   return (
     <div className="container-fluid pt-5 pb-3">
       <h2 className="section-title position-relative text-uppercase mx-xl-5 mb-4">
@@ -39,14 +19,7 @@ const FeaturedProducts = () => {
           </div>
         </div>
       )}
-      {error && (
-        <div className="d-flex justify-content-center">
-        <div className="alert alert-danger mx-xl-5" role="alert" style={{maxWidth: '600px'}}>
-          <strong>Error!</strong> Unable to load featured products.
-        </div>
-        </div>
-      )}
-      {!loading && !error && (
+      {!loading && (
         <ProductList
           products={products}
           rowClass="row px-xl-5"

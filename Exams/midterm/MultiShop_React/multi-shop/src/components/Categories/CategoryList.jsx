@@ -1,46 +1,9 @@
-import { useState, useEffect } from "react";
-
-import { getAllProducts } from "../../utils/dataUtils";
+import { useContext } from "react";
+import { ProductContext } from "../../store/product-context";
 
 const CategoryList = () => {
-  const [categories, setCategories] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
-
-  const getCategoriesWithData = (products) => {
-    const categoryMap = {};
-
-    products.forEach((product) => {
-      if (!categoryMap[product.category]) {
-        categoryMap[product.category] = {
-          name: product.category,
-          thumbnail: product.thumbnail,
-          count: 0,
-        };
-      }
-      categoryMap[product.category].count++;
-    });
-    return Object.values(categoryMap);
-  };
-
-  useEffect(() => {
-    const fetchCategories = async () => {
-      setLoading(true);
-      setError(null);
-      try {
-        const products = await getAllProducts();
-        const categoriesData = getCategoriesWithData(products);
-        setCategories(categoriesData);
-        setLoading(false);
-      } catch (error) {
-        setError(error);
-        setLoading(false);
-      }
-    };
-
-    fetchCategories();
-  }, []);
-
+  const {getCategories:categories, loading} = useContext(ProductContext);
+  
   const formatCategoryName = (name) => {
     return name
       .split("-")
@@ -57,13 +20,7 @@ const CategoryList = () => {
         {loading && (
           <div className="col-12 text-center">Loading Categories...</div>
         )}
-        {error && (
-          <div className="col-12 text-center text-danger">
-            Error loading categories
-          </div>
-        )}
         {!loading &&
-          !error &&
           categories.map((category) => (
             <div
               key={category.name}

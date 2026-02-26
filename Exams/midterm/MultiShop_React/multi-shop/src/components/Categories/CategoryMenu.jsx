@@ -1,28 +1,9 @@
-import { useState, useEffect } from "react";
-
-import { getCategories } from "../../utils/dataUtils";
+import { useContext } from "react";
+import { ProductContext } from "../../store/product-context";
 
 const CategoryMenu = () => {
-  const [categories, setCategories] = useState([]);
-  const [loadingCategory, setLoadingCategory] = useState(false);
-  const [error, setError] = useState(null);
-
-  useEffect(() => {
-    const getCategoryData = async () => {
-      setLoadingCategory(true);
-      setError(null);
-      try {
-        const data = await getCategories();
-        setCategories(data);
-        setLoadingCategory(false);
-      } catch (error) {
-        setError(error);
-        setLoadingCategory(false);
-      }
-    };
-
-    getCategoryData();
-  }, []);
+  const {getCategories, loading } = useContext(ProductContext);
+  const categories = getCategories();
 
   return (
     <div className="col-lg-3 d-none d-lg-block">
@@ -43,22 +24,16 @@ const CategoryMenu = () => {
         style={{ width: "calc(100% - 30px)", zIndex: "999" }}
       >
         <div className="navbar-nav w-100">
-          {loadingCategory && (
+          {loading && (
             <div className="nav-item nav-link">Loading...</div>
           )}
-          {error && (
-            <div className="nav-item nav-link text-danger">
-              Error loading categories
-            </div>
-          )}
 
-          {!loadingCategory &&
-            !error &&
+          {!loading &&
             categories.map((category) => (
               <a
                 key={category.slug}
                 href={`/products/category/${category.slug}`}
-                className="nav-item navelink"
+                className="nav-item nav-link"
               >
                 {category.name}
               </a>
