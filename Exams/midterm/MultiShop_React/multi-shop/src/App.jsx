@@ -10,19 +10,16 @@ import { ProductContextProvider } from "./store/product-context";
 function App() {
   const pathname = window.location.pathname;
 
-  console.log("Current pathname:", pathname); // ← Add this
-
   // Regex check for pathname to match /products/category/[category-name]
   const categoryMatch = pathname.match(/^\/products\/category\/(.+)$/);
   const productMatch = pathname.match(/^\/products\/(\d+)$/);
 
-  console.log("categoryMatch:", categoryMatch); // ← Add this
-  console.log("productMatch:", productMatch);
+  
 
   return (
     <>
       <ProductContextProvider>
-        <Layout>
+        <Layout pathname={pathname}>
           {pathname === "/" && <FeaturedProducts />}
           {pathname === "/categories" && <CategoryList />}
           {categoryMatch && (
@@ -35,7 +32,6 @@ function App() {
           )}
           {productMatch && (
             <>
-              {console.log("Rendering ProductDetail with ID:", productMatch[1])}
               <ProductDetail productId={productMatch[1]} />
             </>
           )}

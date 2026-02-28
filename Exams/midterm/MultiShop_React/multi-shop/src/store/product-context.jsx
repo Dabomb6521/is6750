@@ -41,6 +41,10 @@ export const ProductContextProvider = ({ children }) => {
   const getCategories = () => {
     const categoryMap = {};
 
+    if (!products || !Array.isArray(products)) {
+      return [];
+    }
+
     products.forEach((product) => {
       if (!categoryMap[product.category]) {
         categoryMap[product.category] = {

@@ -1,15 +1,10 @@
 import { useContext } from "react";
 import { ProductContext } from "../../store/product-context";
+import { formatCategoryName } from "../../utils/formatters";
 
 const CategoryList = () => {
-  const {getCategories:categories, loading} = useContext(ProductContext);
-  
-  const formatCategoryName = (name) => {
-    return name
-      .split("-")
-      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-      .join(" ");
-  };
+  const { getCategories, loading } = useContext(ProductContext);
+  const categories = getCategories();
 
   return (
     <div className="container-fluid pt-5">
@@ -28,7 +23,7 @@ const CategoryList = () => {
             >
               <a
                 className="text-decoration-none"
-                href={`/products/category/${category.name}`}
+                href={`/products/category/${category.slug}`}
               >
                 <div className="cat-item d-flex align-items-center mb-4">
                   <div

@@ -103,7 +103,7 @@ const ProductDetail = ({productId}) => {
                       id="size-1"
                       name="size"
                     />
-                    <label className="custom-control-label" htmlfor="size-1">
+                    <label className="custom-control-label" htmlFor="size-1">
                       XS
                     </label>
                   </div>
@@ -114,7 +114,7 @@ const ProductDetail = ({productId}) => {
                       id="size-2"
                       name="size"
                     />
-                    <label className="custom-control-label" htmlfor="size-2">
+                    <label className="custom-control-label" htmlFor="size-2">
                       S
                     </label>
                   </div>
@@ -125,7 +125,7 @@ const ProductDetail = ({productId}) => {
                       id="size-3"
                       name="size"
                     />
-                    <label className="custom-control-label" htmlfor="size-3">
+                    <label className="custom-control-label" htmlFor="size-3">
                       M
                     </label>
                   </div>
@@ -136,7 +136,7 @@ const ProductDetail = ({productId}) => {
                       id="size-4"
                       name="size"
                     />
-                    <label className="custom-control-label" htmlfor="size-4">
+                    <label className="custom-control-label" htmlFor="size-4">
                       L
                     </label>
                   </div>
@@ -147,7 +147,7 @@ const ProductDetail = ({productId}) => {
                       id="size-5"
                       name="size"
                     />
-                    <label className="custom-control-label" htmlfor="size-5">
+                    <label className="custom-control-label" htmlFor="size-5">
                       XL
                     </label>
                   </div>
@@ -163,7 +163,7 @@ const ProductDetail = ({productId}) => {
                       id="color-1"
                       name="color"
                     />
-                    <label className="custom-control-label" htmlfor="color-1">
+                    <label className="custom-control-label" htmlFor="color-1">
                       Black
                     </label>
                   </div>
@@ -174,7 +174,7 @@ const ProductDetail = ({productId}) => {
                       id="color-2"
                       name="color"
                     />
-                    <label className="custom-control-label" htmlfor="color-2">
+                    <label className="custom-control-label" htmlFor="color-2">
                       White
                     </label>
                   </div>
@@ -185,7 +185,7 @@ const ProductDetail = ({productId}) => {
                       id="color-3"
                       name="color"
                     />
-                    <label className="custom-control-label" htmlfor="color-3">
+                    <label className="custom-control-label" htmlFor="color-3">
                       Red
                     </label>
                   </div>
@@ -196,7 +196,7 @@ const ProductDetail = ({productId}) => {
                       id="color-4"
                       name="color"
                     />
-                    <label className="custom-control-label" htmlfor="color-4">
+                    <label className="custom-control-label" htmlFor="color-4">
                       Blue
                     </label>
                   </div>
@@ -207,7 +207,7 @@ const ProductDetail = ({productId}) => {
                       id="color-5"
                       name="color"
                     />
-                    <label className="custom-control-label" htmlfor="color-5">
+                    <label className="custom-control-label" htmlFor="color-5">
                       Green
                     </label>
                   </div>
@@ -227,6 +227,7 @@ const ProductDetail = ({productId}) => {
                     type="text"
                     className="form-control bg-secondary border-0 text-center"
                     value="1"
+                    readOnly
                   />
                   <div className="input-group-btn">
                     <button className="btn btn-primary btn-plus">
@@ -400,7 +401,7 @@ const ProductDetail = ({productId}) => {
                       </div>
                       <form>
                         <div className="form-group">
-                          <label htmlfor="message">Your Review *</label>
+                          <label htmlFor="message">Your Review *</label>
                           <textarea
                             id="message"
                             cols="30"
@@ -409,7 +410,7 @@ const ProductDetail = ({productId}) => {
                           ></textarea>
                         </div>
                         <div className="form-group">
-                          <label htmlfor="name">Your Name *</label>
+                          <label htmlFor="name">Your Name *</label>
                           <input
                             type="text"
                             className="form-control"
@@ -417,7 +418,7 @@ const ProductDetail = ({productId}) => {
                           />
                         </div>
                         <div className="form-group">
-                          <label htmlfor="email">Your Email *</label>
+                          <label htmlFor="email">Your Email *</label>
                           <input
                             type="email"
                             className="form-control"

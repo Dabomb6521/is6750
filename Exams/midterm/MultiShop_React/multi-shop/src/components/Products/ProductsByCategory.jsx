@@ -1,17 +1,12 @@
 import { useContext } from "react";
 import { ProductContext } from "../../store/product-context";
 import ProductList from "./ProductList";
+import { formatCategoryName } from "../../utils/formatters";
 
 const ProductsByCategory = ({ categoryName }) => {
   const {getProductsByCategory, loading} = useContext(ProductContext);
   const products = getProductsByCategory(categoryName)
 
-  const formatCategoryName = (name) => {
-    return name
-      .split("-")
-      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-      .join(" ");
-  };
 
   return (
     <div className="col-lg-9 col-md-8">
