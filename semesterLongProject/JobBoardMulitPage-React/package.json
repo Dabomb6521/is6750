@@ -8,7 +8,7 @@
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "stack": "concurrently \"json-server data.json --port 5001\" \"vite\""
+    "stack": "concurrently \"json-server data.json --port 5001\" \"vite --host\""
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",
