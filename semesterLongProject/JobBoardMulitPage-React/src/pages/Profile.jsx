@@ -2,6 +2,8 @@ import { TextField, Grid, Button, CircularProgress } from "@mui/material";
 import { useRef, use } from "react";
 import ProfileContext from "../store/ProfileContext";
 import { useState } from "react";
+import {getErrorName, getErrorEmail} from '../utils/validate.js'
+import { useInput } from "../hooks/useInput.js";
 
 let counter = 0;
 const Profile = () => {
@@ -13,34 +15,32 @@ const Profile = () => {
     addFunc,
   } = use(ProfileContext);
   const fullNameRef = useRef();
-  const [profile, setProfile] = useState({
-    fullName: "",
-    email: "",
-    title: "",
-    bio: "",
-  });
-  const [changed, setChanged] = useState({
-    fullName: false,
-    email: false,
-    title: false,
-    bio: false,
-  });
 
-  const isValidName =
-    profile.fullName &&
-    profile.fullName.trim().includes(" ") &&
-    profile.fullName.split(" ").length >= 2;
-  const isValidEmail = profile.email && profile.email.includes("@");
+  const [fullName, fullNameChanged, fullNameErrors, handleFullNameChange, resetFullName] = useInput('', getErrorName);
+  const[email, emailChanged, emailErrors, handleEmailChange, resetEmail] = useInput('', getErrorEmail);
+  const [title,,,handleTitleChange, resetTitle] = useInput('');
+  const [bio,,,handleBioChange,resetBio] = useInput('');
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setProfile((old) => ({ ...old, [name]: value }));
-    setChanged((old) => ({ ...old, [name]: true }));
-  };
+  const [showBio, setShowBio] = useState(true);
+
+  const toggleBio = () => {
+    setShowBio((val)=>!val)
+  }
+
+  const handleFormSumbit = (e) => {
+    e.preventDefault();
+    if (fullNameErrors || emailErrors) return
+    addFunc({fullName, email, title, bio})
+    resetBio();
+    resetTitle();
+    resetFullName();
+    resetEmail();
+    console.log("Submitted!")
+  }
 
   console.log("Rendering for the " + ++counter + " time");
   return (
-    <>
+    <form onSubmit={handleFormSumbit}>
       <Grid container spacing={2}>
         <Grid size={12}>
           <h2>My Profile</h2>
@@ -48,53 +48,55 @@ const Profile = () => {
         <Grid size={12}>
           <TextField
             label="Full Name"
-            error={!isValidName && changed.fullName}
+            error={fullNameErrors && fullNameChanged}
             helperText={
-              !isValidName && changed.fullName
+              fullNameErrors && fullNameChanged
                 ? "Please include your first AND last names"
                 : undefined
             }
             fullWidth
-            value={profile.fullName}
+            value={fullName}
             name="fullName"
             inputRef={fullNameRef}
-            onChange={handleChange}
+            onChange={handleFullNameChange}
           />
         </Grid>
         <Grid size={6}>
           <TextField
             label="Email"
-            error={!isValidEmail && changed.email}
+            error={emailErrors && emailChanged}
             helperText={
-              !isValidEmail && changed.email ? "Please include @" : undefined
+              emailErrors && emailChanged ? "Please include @" : undefined
             }
             fullWidth
-            value={profile.email}
+            value={email}
             name="email"
-            onChange={handleChange}
+            onChange={handleEmailChange}
           />
         </Grid>
         <Grid size={6}>
           <TextField
             label="Current Title"
             fullWidth
-            value={profile.title}
-            onChange={handleChange}
+            value={title}
+            onChange={handleTitleChange}
             name="title"
           />
         </Grid>
         <Grid size={12}>
+          <Button onClick={toggleBio}>Hide/Show Bio</Button>
+          
+          <Activity mode={showBio?"visible": "hidden"}>
           <TextField
             label="Bio/Summary"
             multiline
             fullWidth
-            value={profile.bio}
-            onChange={handleChange}
             name="bio"
           />
+          </Activity>
         </Grid>
         <Grid container>
-          <Button variant="contained" size="large" disabled={!isValidEmail||!isValidName}>
+          <Button type="submit" variant="contained" size="large" disabled={emailErrors||fullNameErrors}>
             Save
           </Button>
           <Button variant="outlined" size="large">
@@ -116,7 +118,7 @@ const Profile = () => {
           {!loading && error && <h1>{error.message}</h1>}
         </Grid>
       </Grid>
-    </>
+    </form>
   );
 };
 
