@@ -5,7 +5,7 @@ const ProfileContext = createContext(
         profileHistory:[],
         loading:false,
         error:"",
-        deleteFunc:()=>{},
+        deleteFunc:(id)=>{},
         addFunc:(data)=>{}
 })
 

@@ -1,6 +1,7 @@
 import { TextField, Grid, Button, CircularProgress } from "@mui/material";
-import { useState, useRef, use } from "react";
+import { useRef, use } from "react";
 import ProfileContext from "../store/ProfileContext";
+import { useState } from "react";
 
 let counter = 0;
 const Profile = () => {
@@ -12,7 +13,6 @@ const Profile = () => {
     addFunc,
   } = use(ProfileContext);
   const fullNameRef = useRef();
-
   const [profile, setProfile] = useState({
     fullName: "",
     email: "",
@@ -48,28 +48,30 @@ const Profile = () => {
         <Grid size={12}>
           <TextField
             label="Full Name"
-            fullWidth
-            inputRef={fullNameRef}
             error={!isValidName && changed.fullName}
             helperText={
               !isValidName && changed.fullName
-                ? "Please include your first and last names"
+                ? "Please include your first AND last names"
                 : undefined
             }
+            fullWidth
             value={profile.fullName}
             name="fullName"
+            inputRef={fullNameRef}
+            onChange={handleChange}
           />
         </Grid>
         <Grid size={6}>
           <TextField
             label="Email"
-            fullWidth
-            onChange={handleChange}
             error={!isValidEmail && changed.email}
             helperText={
               !isValidEmail && changed.email ? "Please include @" : undefined
             }
-            name='email'
+            fullWidth
+            value={profile.email}
+            name="email"
+            onChange={handleChange}
           />
         </Grid>
         <Grid size={6}>
@@ -92,7 +94,7 @@ const Profile = () => {
           />
         </Grid>
         <Grid container>
-          <Button variant="contained" size="large" disabled={!isValidName || !isValidEmail}>
+          <Button variant="contained" size="large" disabled={!isValidEmail||!isValidName}>
             Save
           </Button>
           <Button variant="outlined" size="large">

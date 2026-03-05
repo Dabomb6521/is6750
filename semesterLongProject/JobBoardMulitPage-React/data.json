@@ -148,6 +148,14 @@
       "email": "tim@batman.com",
       "title": "Robin",
       "bio": "Stuffy Stuff"
+    },
+    {
+      "id": "1asdfe",
+      "fullName": "Mariah Carey",
+      "email": "mc@gmaill.com",
+      "title": "Singer/Songwriter",
+      "bio": "Cool"
     }
-  ]
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
 }

@@ -5,7 +5,7 @@ import ProfileContext from "../store/ProfileContext";
 let counter = 0;
 const Profile = () => {
 
-    const {profileHistory:history,loading,error,deleteFunc, addFunc} = use(ProfileContext)
+    const {profileHistory:history,loading,error,deleteFunc,addFunc} = use(ProfileContext)
     const fullNameRef = useRef();
     const emailRef = useRef();
     const titleRef = useRef();
