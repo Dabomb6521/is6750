@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 
-import { deleteData, getData } from "../utils/jobUtils";
+import { deleteData, getData, createData } from "../utils/jobUtils";
 
 export const useBackendSync = (url) => {
   const [data, setData] = useState([]);
@@ -8,7 +8,7 @@ export const useBackendSync = (url) => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    const fetchData = async () => {
+    const gatherData = async () => {
       setLoading(true);
       setError(null);
       try {
@@ -19,23 +19,27 @@ export const useBackendSync = (url) => {
       }
       setLoading(false);
     };
-
-    fetchData();
-  }, [url]);
+    gatherData();
+  }, []);
 
   async function handleDeleteEvent(id) {
-    setData((dataList) => dataList.filter((item) => item.id != id))
+    setData((dataList) => dataList.filter((item) => item.id != id));
     try {
       const val = await deleteData(url, id);
+    } catch (err) {
+      setData(data);
+    }
+  }
+
+  async function handleAddData(newData) {
+    setData((dataList) => [...dataList, {...newData,id:Date.now()}])
+    try {
+      const val = await createData(url, newData)
     } catch (err) {
       setData(data)
     }
   }
 
-  return {
-    loading,
-    data,
-    error,
-    handleDeleteEvent
-  };
+  return [data, loading, error, handleDeleteEvent, handleAddData];
+  
 };

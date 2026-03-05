@@ -1,7 +1,7 @@
-// import { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import JobCard from "../components/JobCard";
 import JobResultsArea from "../components/JobResultsArea";
-// import axios from "axios"
+import axios from "axios"
 // import { deleteJob, getJobs, updateJob } from "../utils/jobUtils";
 import { CircularProgress, Grid } from "@mui/material";
 import { useBackendSync } from "../hooks/useBackendSync";
@@ -10,17 +10,16 @@ import { useBackendSync } from "../hooks/useBackendSync";
 const backendBaseURL = "http://localhost:5001/jobs"
 
 const Home = () => {
-  const [jobs, loadingJobs, error] = useBackendSync(backendBaseURL)
+  const [jobs,loadingJobs,error,handleDeleteEvent] = useBackendSync(backendBaseURL);
 
-
-  async function handleDeleteEvent(jobId) {
-    // setJobs((jobsList) => jobsList.filter((job) => job.id != jobId));
-    // try {
-    //   const data = await deleteJob(jobId);
-    // } catch (err) {
-    //   setJobs(jobs)
-    // }
-  }
+  // async function handleDeleteEvent(jobId) {
+  //   // setJobs((jobsList) => jobsList.filter((job) => job.id != jobId));
+  //   // try {
+  //   //   const data = await deleteJob(jobId);
+  //   // } catch (err) {
+  //   //   setJobs(jobs)
+  //   // }
+  // }
 
   async function handleAppplyEvent(jobId) {
     // setJobs(jobsList=>jobsList.map(val=>val.id===jobId?{...val,applied:true}:{...val}))
@@ -31,6 +30,9 @@ const Home = () => {
     // }
   }
 
+
+  // const [data,loading,eroor,add,update,deleteStuff] = useMyCustomHook()
+
   return (
     <>
       {<Grid container>
@@ -39,7 +41,7 @@ const Home = () => {
           {error && <h1>{error.message}</h1>}
         </Grid>
       </Grid>}
-      {jobs.length > 0 && !error && (
+      {jobs&&jobs.length > 0 && !error && (
         <JobResultsArea num={jobs.length}>
           {jobs.map((job) => (
             <JobCard

@@ -12,17 +12,142 @@
         "React/Vue experience",
         "Strong CSS skills",
         "Git proficiency"
-      ],
-      "applied": true
+      ]
+    },
+    {
+      "id": "2",
+      "title": "Backend Developer",
+      "company": "DataStream Inc.",
+      "location": "Logan, UT",
+      "type": "Full-Time",
+      "posted": "5 days ago",
+      "description": "Seeking a Backend Developer to design and implement server-side logic, ensuring high performance and responsiveness.",
+      "requirements": [
+        "Node.js/Express experience",
+        "Database management skills",
+        "API development experience"
+      ]
+    },
+    {
+      "id": "3",
+      "title": "Full Stack Developer",
+      "company": "Innovatech Solutions",
+      "location": "Logan, UT",
+      "type": "Full-Time",
+      "posted": "1 week ago",
+      "description": "We are looking for a Full Stack Developer to work on both frontend and backend development tasks, ensuring seamless integration.",
+      "requirements": [
+        "Experience with React and Node.js",
+        "Strong problem-solving skills",
+        "Ability to work in a team"
+      ]
+    },
+    {
+      "id": "4",
+      "title": "UI/UX Designer",
+      "company": "Creative Minds Studio",
+      "location": "Logan, UT",
+      "type": "Part-Time",
+      "posted": "3 days ago",
+      "description": "Seeking a UI/UX Designer to create intuitive and visually appealing designs for our web applications.",
+      "requirements": [
+        "Proficiency in design tools (Figma, Adobe XD)",
+        "Strong portfolio of design work",
+        "Understanding of user-centered design principles"
+      ]
+    },
+    {
+      "id": "5",
+      "title": "DevOps Engineer",
+      "company": "CloudTech Solutions",
+      "location": "Logan, UT",
+      "type": "Full-Time",
+      "posted": "4 days ago",
+      "description": "We are looking for a DevOps Engineer to manage our infrastructure and ensure smooth deployment processes.",
+      "requirements": [
+        "Experience with AWS/Azure/GCP",
+        "Knowledge of CI/CD pipelines",
+        "Strong scripting skills"
+      ]
+    },
+    {
+      "id": "6",
+      "title": "Data Scientist",
+      "company": "Data Insights Inc.",
+      "location": "Logan, UT",
+      "type": "Full-Time",
+      "posted": "1 week ago",
+      "description": "Seeking a Data Scientist to analyze complex data sets and provide actionable insights to drive business decisions.",
+      "requirements": [
+        "Experience with Python/R",
+        "Strong statistical analysis skills",
+        "Ability to communicate findings effectively"
+      ]
+    },
+    {
+      "id": "7",
+      "title": "Mobile App Developer",
+      "company": "AppWorks Studio",
+      "location": "Logan, UT",
+      "type": "Full-Time",
+      "posted": "2 days ago",
+      "description": "We are looking for a Mobile App Developer to create high-quality mobile applications for both iOS and Android platforms.",
+      "requirements": [
+        "Experience with React Native/Flutter",
+        "Strong understanding of mobile UI/UX principles",
+        "Ability to optimize app performance"
+      ]
+    },
+    {
+      "id": "8",
+      "title": "QA Engineer",
+      "company": "QualityFirst Solutions",
+      "location": "Logan, UT",
+      "type": "Full-Time",
+      "posted": "5 days ago",
+      "description": "Seeking a QA Engineer to develop and execute test plans to ensure the quality of our software products.",
+      "requirements": [
+        "Experience with automated testing tools (Selenium, Jest)",
+        "Strong attention to detail",
+        "Ability to identify and report bugs effectively"
+      ]
+    },
+    {
+      "id": "9",
+      "title": "Product Manager",
+      "company": "Innovatech Solutions",
+      "location": "Logan, UT",
+      "type": "Full-Time",
+      "posted": "1 week ago",
+      "description": "We are looking for a Product Manager to oversee the development and launch of new products, ensuring they meet customer needs.",
+      "requirements": [
+        "Experience in product management",
+        "Strong leadership skills",
+        "Ability to work cross-functionally"
+      ]
+    },
+    {
+      "id": "10",
+      "title": "Technical Support Specialist",
+      "company": "TechFlow Solutions",
+      "location": "Logan, UT",
+      "type": "Part-Time",
+      "posted": "3 days ago",
+      "description": "Seeking a Technical Support Specialist to provide assistance to customers and resolve technical issues.",
+      "requirements": [
+        "Strong communication skills",
+        "Experience in technical support roles",
+        "Ability to troubleshoot and resolve issues efficiently"
+      ]
     }
   ],
   "profiles": [
     {
-      "id": "lsdjfls",
-      "fullName": "Brayden Corbridge",
-      "email": "brayden.corbridge@example.com",
-      "title": "Frontend Developer",
-      "bio": "Some really cool stuff!"
+      "id": "1asdfe",
+      "fullName": "Tim Drake",
+      "email": "tim@batman.com",
+      "title": "Robin",
+      "bio": "Stuffy Stuff"
     }
   ]
 }

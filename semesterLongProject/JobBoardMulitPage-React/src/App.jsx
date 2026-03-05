@@ -13,12 +13,13 @@ function App() {
 
 const {page} = use(RouterContext);
 // const [history,setHistory] = useState([]);
-const [ history, loading, error, deleteFunc] = useBackendSync('http://localhost:5001/profiles')
+const [history,loading,error,deleteFunc, addFunc] = useBackendSync("http://localhost:5001/profiles");
+// const [history,loading,error] = useBackendSync("http://localhost:5001/profiles")
 
   return (
     <>
     
-    <ProfileContext value={{profileHistory:history, loading, error, deleteFunc}}>
+    <ProfileContext value={{profileHistory:history,loading,error,deleteFunc, addFunc}}>
       <Header/>
       <MainArea>
         {page==="home"&&<Home/>}
