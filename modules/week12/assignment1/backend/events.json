@@ -1,11 +1,1 @@
-{
-  "events": [
-    {
-      "id": "e1",
-      "title": "A dummy event",
-      "date": "2023-02-22",
-      "image": "https://blog.hubspot.de/hubfs/Germany/Blog_images/Optimize_Marketing%20Events%20DACH%202021.jpg",
-      "description": "Join this amazing event and connect with fellow developers."
-    }
-  ]
-}
+{"events":[{"title":"asdfasdf","image":"https://www.firstevent.co.uk/wp-content/uploads/2019/09/Event-marketing-importance1.png","date":"2026-03-26","description":"asdfasdf","id":"8591c81c-26fc-4d57-9d03-87e1ca850c65"},{"title":"asdfasdf","image":"https://www.firstevent.co.uk/wp-content/uploads/2019/09/Event-marketing-importance1.png","date":"2026-03-26","description":"asdfsadf","id":"04f14ec7-0372-4c12-ad11-5181b6f5eb85"},{"title":"asdffewfe","image":"https://www.firstevent.co.uk/wp-content/uploads/2019/09/Event-marketing-importance1.png","date":"2026-04-03","description":"fewfwefewfsdf","id":"59b2fa9f-ac6f-437b-bb9b-716d3bc22872"},{"id":"e1","title":"A dummy event","date":"2023-02-22","image":"https://blog.hubspot.de/hubfs/Germany/Blog_images/Optimize_Marketing%20Events%20DACH%202021.jpg","description":"Join this amazing event and connect with fellow developers."}]}
