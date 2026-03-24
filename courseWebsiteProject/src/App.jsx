@@ -1,14 +1,13 @@
+import { createBrowserRouter, RouterProvider, Outlet } from "react-router";
 import "./App.css";
-
-import { createBrowserRouter, RouterProvider } from "react-router";
-import RootLayout from "./Pages/RootLayout";
-import AllVideos, { loader as videoLoader } from "./Pages/AllVideos";
-import EditVideo, {loader as editVideoLoader} from "./Pages/EditVideo";
+import { DefaultLayout } from "./pages/DefaultLayout";
+import AllVideos, {loader as videoLoader} from "./pages/Videos/AllVideos";
+import EditVideo, { loader as editVideoLoader } from "./pages/Videos/Edit";
 
 const router = createBrowserRouter([
   {
-    path: "/",
-    Component: RootLayout,
+    path:"/",
+    Component: DefaultLayout ,
     children: [
       { index: true, element: <h1>Home</h1> },
       {
@@ -25,14 +24,10 @@ const router = createBrowserRouter([
       {
         path: "video",
         children: [
-          {
-            index: true,
-            element: <AllVideos />,
-            loader: videoLoader,
-          },
+          { index: true, Component:AllVideos, loader: videoLoader},
           { path: ":id", element: <h1>View Specific Video</h1> },
           { path: "create/:id", element: <h1>Create new Video</h1> },
-          { path: "edit/:id", element: <EditVideo />, loader: editVideoLoader },
+          { path: "edit/:id", Component: EditVideo, loader:editVideoLoader },
           { path: "delete/:id", element: <h1>Delete specific Video</h1> },
           { path: "watch/:id", element: <h1>Watch a specific Video</h1> },
         ],
@@ -42,7 +37,11 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
-  return <RouterProvider router={router} />;
+  return (
+    <>
+      <RouterProvider router={router} />
+    </>
+  );
 }
 
 export default App;
