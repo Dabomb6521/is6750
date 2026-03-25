@@ -1,13 +1,16 @@
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router";
 import "./App.css";
 import { DefaultLayout } from "./pages/DefaultLayout";
-import AllVideos, {loader as videoLoader} from "./pages/Videos/AllVideos";
-import EditVideo, { loader as editVideoLoader } from "./pages/Videos/Edit";
+import AllVideos, { loader as videoLoader } from "./pages/Videos/AllVideos";
+import EditVideo, {
+  loader as editVideoLoader,
+  action as editVideoAction,
+} from "./pages/Videos/Edit";
 
 const router = createBrowserRouter([
   {
-    path:"/",
-    Component: DefaultLayout ,
+    path: "/",
+    Component: DefaultLayout,
     children: [
       { index: true, element: <h1>Home</h1> },
       {
@@ -24,10 +27,15 @@ const router = createBrowserRouter([
       {
         path: "video",
         children: [
-          { index: true, Component:AllVideos, loader: videoLoader},
+          { index: true, Component: AllVideos, loader: videoLoader },
           { path: ":id", element: <h1>View Specific Video</h1> },
           { path: "create/:id", element: <h1>Create new Video</h1> },
-          { path: "edit/:id", Component: EditVideo, loader:editVideoLoader },
+          {
+            path: "edit/:id",
+            Component: EditVideo,
+            loader: editVideoLoader,
+            action: editVideoAction,
+          },
           { path: "delete/:id", element: <h1>Delete specific Video</h1> },
           { path: "watch/:id", element: <h1>Watch a specific Video</h1> },
         ],
