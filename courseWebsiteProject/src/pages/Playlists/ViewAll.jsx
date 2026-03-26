@@ -1,13 +1,13 @@
-import { Delete, Edit } from '@mui/icons-material';
-import { Grid, Typography } from '@mui/material';
 import axios from 'axios';
 import React, {Fragment} from 'react'
-import { Link, useLoaderData } from 'react-router'
+import { useLoaderData,Link } from 'react-router'
+import { Grid,Typography } from '@mui/material';
+import { Edit,Delete } from '@mui/icons-material';
 
-const AllVideos = () => {
-    const videos = useLoaderData();
-    return (
-        <>
+const ViewAll = () => {
+    const playlistData = useLoaderData();
+  return (
+    <>
     
             <Grid container spacing={2}>
 
@@ -38,32 +38,31 @@ const AllVideos = () => {
 
 
 
-                    {videos.map(vid =><Fragment key={vid.id}>
+                    {playlistData.map(playlist =><Fragment key={playlist.id}>
                         <Grid size={3} >
-                            {vid.title}
+                            {playlist.title}
                         </Grid>
                         <Grid size={3} >
-                            <Link to={vid.id}>View</Link>
+                            <Link to={playlist.id}>View</Link>
                         </Grid>
                         <Grid size={3}>
-                            <Link to={`edit/${vid.id}`}> 
+                            <Link to={`edit/${playlist.id}`}> 
                             <Edit/>
                             </Link>
                         </Grid>
                         <Grid size={3} >
-                            <Link to={`delete/${vid.id}`}><Delete/></Link>
+                            <Link to={`delete/${playlist.id}`}><Delete/></Link>
                         </Grid>
                         </Fragment>
                     )}
           </Grid>
         </>
-    )
+  )
 }
 
-export default AllVideos
+export default ViewAll
 
-export const loader = async () => {
-    const { data } = await axios.get("http://localhost:3000/videos");
-
-    return data;
+export const loader = async ()=>{
+    const {data} = await axios.get("http://localhost:3000/playlists");
+    return data
 }

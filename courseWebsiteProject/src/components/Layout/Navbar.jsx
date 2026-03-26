@@ -1,25 +1,34 @@
-import React from 'react'
-import { NavLink } from 'react-router'
-import { Grid } from '@mui/material'
+import React from "react";
+import { NavLink, useRouteLoaderData } from "react-router";
+import { Grid } from "@mui/material";
 export const Navbar = () => {
-    return (
-        <Grid container spacing={2}>
+  const user = useRouteLoaderData("root");
+  return (
+    <Grid container spacing={2}>
+      <Grid size={3}>
+        <NavLink to={"/"} end>
+          Home
+        </NavLink>
+      </Grid>
 
-            <Grid size={4}>
-                <NavLink to={"/"} end>Home</NavLink>
-            </Grid>
+      <Grid size={3}>
+        <NavLink to={"/video"}>Videos</NavLink>
+      </Grid>
 
-            <Grid size={4}>
+      <Grid size={3}>
+        <NavLink to={"/playlist"}>Playlists</NavLink>
+      </Grid>
 
-                <NavLink to={"/video"}>Videos</NavLink>
-            </Grid>
-
-            <Grid size={4}>
-
-                <NavLink to={"/playlist"}>Playlists</NavLink>
-            </Grid>
-
-
+      {!user && (
+        <Grid size={3}>
+          <NavLink to={"/login"}>Login</NavLink>
         </Grid>
-    )
-}
+      )}
+      {user && (
+        <Grid size={3}>
+          <NavLink to={"/logout"}>Log Out</NavLink>
+        </Grid>
+      )}
+    </Grid>
+  );
+};
