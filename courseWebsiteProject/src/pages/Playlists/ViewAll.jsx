@@ -40,7 +40,9 @@ const ViewAll = () => {
 
                     {playlistData.map(playlist =><Fragment key={playlist.id}>
                         <Grid size={3} >
+                            <Link to={`watch/${playlist.id}`}>
                             {playlist.title}
+                            </Link>
                         </Grid>
                         <Grid size={3} >
                             <Link to={playlist.id}>View</Link>

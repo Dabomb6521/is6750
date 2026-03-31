@@ -1,9 +1,9 @@
-import supabase from "../../utils/supabase";
+import supabase from "../../utils/supabase"
 
-export const loader = async () => {
-  await supabase.auth.signInWithOAuth({
-    provider: "google",
-  });
+export const loader = async ()=>{
+    await supabase.auth.signInWithOAuth({
+        provider:"google"
+    });
 
-  return null;
-};
+    return null;
+}
