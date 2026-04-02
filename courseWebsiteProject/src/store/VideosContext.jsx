@@ -1,4 +1,6 @@
 import { createContext, useState, useEffect } from "react";
+import useYouTubeInit from "../hooks/useYouTubeInit";
+import useBackendSync from "../hooks/useBackendSync";
 
 // Create context
 export const VideosContext = createContext({
@@ -19,23 +21,7 @@ export const VideosContext = createContext({
 
 export const VideosProvider = ({ children }) => {
     // Subscribe to our backend
-    const [videos, setVideos] = useState(null);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const response = await fetch(`http://localhost:3000/videos`);
-                const data = await response.json();
-                setVideos(data);
-            } catch (error) {
-                setError(error);
-            } finally {
-                setLoading(false);
-            }
-        };
-        fetchData();
-    }, []);
+    const {data:videos,loading,error} = useBackendSync(`http://localhost:3000/videos`)
     // Track the current video
     const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
 
@@ -49,11 +35,7 @@ export const VideosProvider = ({ children }) => {
     const [watchPercent, setWatchPercent] = useState(0);
 
     // Subscribe to the YouTube API
-    useEffect(() => {
-        const tag = document.createElement("script");
-        tag.src = "https://www.youtube.com/iframe_api";
-        document.body.appendChild(tag);
-    }, []);
+    useYouTubeInit();
 
     return (
         <VideosContext value={{ setWatchPercent, watchPercent, videos, currentVideoIndex, setCurrentVideoIndex, playBackSpeed, setPlayBackSpeed, currentTimeStamp, setCurrentTimeStamp, loading, error }}>

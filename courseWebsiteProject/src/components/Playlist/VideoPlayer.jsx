@@ -1,6 +1,9 @@
-import { useContext } from "react";
+import { useContext, useRef, useEffect } from "react";
 import { VideosContext } from "../../store/VideosContext";
-import useYoutubeVideo from "../../hooks/useYoutubeVideo";
+import { useState } from "react";
+import useYouTubePlayer from "../../hooks/useYouTubePlayer";
+import useVideoProgress from "../../hooks/useVideoProgress";
+import useLoadNextVideo from "../../hooks/useLoadNextVideo";
 
 export default function YouTubePlayer() {
   const {
@@ -9,7 +12,7 @@ export default function YouTubePlayer() {
     setCurrentVideoIndex,
     setWatchPercent: setProgress,
   } = useContext(VideosContext);
-  const videoId = videos[currentVideoIndex].youtubeUrl.split("/").pop();
+
   const onVideoEnd = (event) => {
     if (event.data === window.YT.PlayerState.ENDED) {
       // If the video has ended either increment the video or start the playlist over
@@ -18,13 +21,19 @@ export default function YouTubePlayer() {
       });
     }
   };
-
-  // When the page loads create the callback function so that the YouTube API can create the video.
-  const { playerRef, containerRef, playerReady } = useYoutubeVideo(
+  // Grab the current video id from the url
+  const videoId = videos[currentVideoIndex].youtubeUrl.split("/").pop();
+  // Initialize the video player
+  const { playerRef, containerRef, playerReady } = useYouTubePlayer(
     videoId,
     onVideoEnd,
-    setProgress,
   );
+  // Subscribe to progress updates.
+  useVideoProgress(videoId, playerReady, playerRef, (elapsed, total) =>
+    setProgress((Number(elapsed) / Number(total)) * 100),
+  );
+  // Load next video on success
+  useLoadNextVideo(playerRef, playerReady, videoId);
 
   // User controls
   const play = () => {
