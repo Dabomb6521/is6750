@@ -1,21 +1,20 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit"
 
-const initialVideoState = {
-  playbackSpeed: 1,
-  currentTimeStamp: 0,
-  watchPercent: 0,
-};
 
-const videosSlice = createSlice({
-  name: "videos",
-  initialState: initialVideoState,
-  reducers: {
-    setWatchPercent(state, action) {
-      state.watchPercent = action.payload;
+const videoSlice = createSlice({
+initialState:{
+    playbackSpeed:1,
+    currentTimeStamp:0,
+    watchPercent:0
+},
+name:"video",
+reducers:{
+    setWatchPercent:(state,action)=>{
+        state.watchPercent = action.payload;
     },
-  },
-});
+}
+})
 
-export const { setWatchPercent } = videosSlice.actions;
+export const {setWatchPercent} = videoSlice.actions
 
-export default videosSlice.reducer;
+export default videoSlice.reducer

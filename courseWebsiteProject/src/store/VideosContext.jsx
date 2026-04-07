@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useState, useEffect } from "react";
 import useYouTubeInit from "../hooks/useYouTubeInit";
 import useBackendSync from "../hooks/useBackendSync";
 

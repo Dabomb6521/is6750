@@ -1,13 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
-
-import uiReducer from "./ui";
-import playlistsReducer from "./playlist";
-import videoReducer from "./video";
-
+import uiReducer from "./ui"
+import playlistReducer from "./playlist"
+import videoReducer from "./video"
 export default configureStore({
-  reducer: {
-    ui: uiReducer,
-    playlists: playlistsReducer,
-    video: videoReducer,
-  },
-});
+    reducer:{
+     ui: uiReducer,
+     playlists:playlistReducer,
+     video:videoReducer,
+    }
+})
