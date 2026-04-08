@@ -1,24 +1,31 @@
-import { useContext, useRef, useEffect } from "react";
+// import { useContext, useRef, useEffect } from "react";
 import { VideosContext } from "../../store/VideosContext";
-import { useState } from "react";
+// import { useState } from "react";
 import useYouTubePlayer from "../../hooks/useYouTubePlayer";
 import useVideoProgress from "../../hooks/useVideoProgress";
 import useLoadNextVideo from "../../hooks/useLoadNextVideo";
+import { useDispatch, useSelector } from "react-redux";
+import { moveToNextVideo } from "../../store/playlist";
+import { setWatchPercent } from "../../store/video";
 
 export default function YouTubePlayer() {
-  const {
-    videos,
-    currentVideoIndex,
-    setCurrentVideoIndex,
-    setWatchPercent: setProgress,
-  } = useContext(VideosContext);
+  // const {
+  //   videos,
+  //   currentVideoIndex,
+  //   setCurrentVideoIndex,
+  //   setWatchPercent: setProgress,
+  // } = useContext(VideosContext);
+  const videos = useSelector(state=>state.playlist.videos)
+  const currentVideoIndex = useSelector(state=>state.playlists.currentVideoIndex)
+  const dispatch = useDispatch()
 
   const onVideoEnd = (event) => {
     if (event.data === window.YT.PlayerState.ENDED) {
       // If the video has ended either increment the video or start the playlist over
-      setCurrentVideoIndex((prev) => {
-        return (prev + 1) % videos.length;
-      });
+      // setCurrentVideoIndex((prev) => {
+      //   return (prev + 1) % videos.length;
+      // });
+      dispatch(moveToNextVideo())
     }
   };
   // Grab the current video id from the url
@@ -30,7 +37,8 @@ export default function YouTubePlayer() {
   );
   // Subscribe to progress updates.
   useVideoProgress(videoId, playerReady, playerRef, (elapsed, total) =>
-    setProgress((Number(elapsed) / Number(total)) * 100),
+    // setProgress((Number(elapsed) / Number(total)) * 100),
+    dispatch(setWatchPercent((Number(elapsed) / Number(total)) * 100))
   );
   // Load next video on success
   useLoadNextVideo(playerRef, playerReady, videoId);

@@ -8,6 +8,10 @@ import ViewAllPlaylists, { loader as playlistLoader} from "./pages/Playlists/Vie
 import { loader as signInLoader} from "./pages/Auth/SignInWithGoogle";
 import supabase from "./utils/supabase";
 import Play from "./pages/Playlists/Play";
+import { useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { initializeData } from "./store/action";
+import useYouTubeInit from "./hooks/useYouTubeInit";
 
 const router = createBrowserRouter([
   {
@@ -59,6 +63,13 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(initializeData('http://localhost:3000/videos'));
+  }, []);
+
+  useYouTubeInit()
   return (
     <>
       <RouterProvider router={router} />

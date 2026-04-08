@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const playlistSlice = createSlice({
   initialState: {
-    videos: null,
+    videos: [],
     currentVideoIndex: 0,
   },
   name: "playlists",
@@ -12,10 +12,13 @@ const playlistSlice = createSlice({
     },
     moveToNextVideo:(state)=>{
         state.currentVideoIndex = (state.currentVideoIndex + 1) % state.videos.length;
+    },
+    setPlaylist: (state, action) => {
+      state.videos = action.payload;
     }
   },
 });
 
-export const {moveToNextVideo,setCurrentVideoIndex} = playlistSlice.actions;
+export const {moveToNextVideo,setCurrentVideoIndex,setPlaylist} = playlistSlice.actions;
 
 export default playlistSlice.reducer;
