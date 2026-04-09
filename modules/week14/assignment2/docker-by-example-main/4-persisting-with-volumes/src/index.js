@@ -11,6 +11,9 @@ const fortunes = [
   "Docker is not just a tool, it's a lifestyle.",
   "The answer you seek is in the logs.",
   "A volume will save your data from certain doom.",
+  "You will soon master the art of containerization",
+  "Master of the container you are",
+  "You are the chosen one",
 ];
 
 const wisdoms = [
