@@ -66,7 +66,7 @@ const router = createBrowserRouter([
           { path: "create/:id", element: <h1>Create new Video</h1> },
           { path: "edit/:id", 
             lazy: async()=>{
-              const module = await import("./pages/videos/Edit")
+              const module = await import("./pages/Videos/Edit")
               return {Component: module.default, ...module}
             }
             },
