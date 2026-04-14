@@ -1,15 +1,16 @@
 import { createBrowserRouter, RouterProvider, Outlet, redirect } from "react-router";
 import "./App.css";
 import { DefaultLayout } from "./pages/DefaultLayout";
-import AllVideos, {loader as videoLoader} from "./pages/Videos/AllVideos";
-import EditVideo, { loader as editVideoLoader, action as editVideoAction} from "./pages/Videos/Edit";
+import Home from "./pages/Home";
+// import AllVideos, {loader as videoLoader} from "./pages/Videos/AllVideos";
+// import EditVideo, { loader as editVideoLoader, action as editVideoAction} from "./pages/Videos/Edit";
 import axios from "axios";
-import ViewAllPlaylists, { loader as playlistLoader} from "./pages/Playlists/ViewAll";
-import { loader as signInLoader} from "./pages/Auth/SignInWithGoogle";
+// import ViewAllPlaylists, { loader as playlistLoader} from "./pages/Playlists/ViewAll";
+// import { loader as signInLoader} from "./pages/Auth/SignInWithGoogle";
 import supabase from "./utils/supabase";
-import Play from "./pages/Playlists/Play";
-import { useDispatch } from "react-redux";
+// import Play from "./pages/Playlists/Play";
 import { useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { initializeData } from "./store/action";
 import useYouTubeInit from "./hooks/useYouTubeInit";
 
@@ -23,8 +24,10 @@ const router = createBrowserRouter([
       return token.data.user
     },
     children: [
-      { index: true, element: <h1>Home</h1> },
-      {path:"login",loader:signInLoader},
+      { index: true, Component: Home },
+      {path:"login",
+        lazy: async () => await import("./pages/Auth/SignInWithGoogle")
+      },
       {path:"logout",loader:async ()=>{
         await supabase.auth.signOut();
         return redirect("/")
@@ -32,21 +35,41 @@ const router = createBrowserRouter([
       {
         path: "playlist",
         children: [
-          { index: true, Component:ViewAllPlaylists, loader: playlistLoader},
+          { index: true, 
+            lazy: async()=>{
+              const module = await import("./pages/Playlists/ViewAll")
+              return {Component: module.default, ...module}
+            }
+            },
           { path: ":id", element: <h1>View Specific Playlist</h1> },
           { path: "create/:id", element: <h1>Create new playlist</h1> },
           { path: "edit/:id", element: <h1>Edit specific playlist</h1> },
           { path: "delete/:id", element: <h1>Delete specific playlist</h1> },
-          { path: "watch/:id", Component:Play},
+          { path: "watch/:id", 
+            lazy: async()=>{
+              const module = await import("./pages/Playlists/Play")
+              return {Component: module.default, ...module}
+            }
+            },
         ],
       },
       {
         path: "video",
         children: [
-          { index: true, Component:AllVideos, loader: videoLoader},
+          { index: true, 
+            lazy: async()=>{
+              const module = await import ("./pages/Videos/AllVideos")
+              return {Component: module.default, ...module}
+            }
+            },
           { path: ":id", element: <h1>View Specific Video</h1> },
           { path: "create/:id", element: <h1>Create new Video</h1> },
-          { path: "edit/:id", Component: EditVideo, loader:editVideoLoader, action: editVideoAction},
+          { path: "edit/:id", 
+            lazy: async()=>{
+              const module = await import("./pages/videos/Edit")
+              return {Component: module.default, ...module}
+            }
+            },
           { path: "delete/:id", loader: async ({params})=>{
             try{
               await axios.delete("http://localhost:3000/videos/"+params.id);
@@ -63,13 +86,12 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
+  useEffect(()=>{
+    dispatch(initializeData("http://localhost:3000/videos"))
+  },[dispatch]);
 
-  useEffect(() => {
-    dispatch(initializeData('http://localhost:3000/videos'));
-  }, []);
-
-  useYouTubeInit()
+  useYouTubeInit();
   return (
     <>
       <RouterProvider router={router} />

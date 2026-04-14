@@ -13,12 +13,12 @@ const playlistSlice = createSlice({
     moveToNextVideo:(state)=>{
         state.currentVideoIndex = (state.currentVideoIndex + 1) % state.videos.length;
     },
-    setPlaylist: (state, action) => {
-      state.videos = action.payload;
+    overwritePlaylist:(state,action)=>{
+      state.videos = action.payload
     }
   },
 });
 
-export const {moveToNextVideo,setCurrentVideoIndex,setPlaylist} = playlistSlice.actions;
+export const {moveToNextVideo,setCurrentVideoIndex,overwritePlaylist} = playlistSlice.actions;
 
 export default playlistSlice.reducer;
