@@ -1,3 +1,5 @@
+import { Link } from "react-router";
+
 const ProductTile = ({ product, colClasses }) => {
   const calculateOriginalPrice = (price, discountPercentage) => {
     if (!discountPercentage) return null;
@@ -32,9 +34,9 @@ const ProductTile = ({ product, colClasses }) => {
           </div>
         </div>
         <div className="text-center py-4">
-          <a className="h6 text-decoration-none text-truncate" href={`/products/${product.id}`}>
+          <Link className="h6 text-decoration-none text-truncate" to={`/products/${product.id}`}>
             {product.title}
-          </a>
+          </Link>
           <div className="d-flex align-items-center justify-content-center mt-2">
             <h5>{product.price.toFixed(2)}</h5>
             {originalPrice && (

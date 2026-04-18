@@ -2,14 +2,18 @@ import Breadcrumb from "./Breadcrumb";
 import Footer from "./Footer";
 import NavBar from "./NavBar";
 import TopBar from "./TopBar";
+import { Outlet, useNavigation } from "react-router";
+import Spinner from "../../utils/spinner";
 
-const Layout = ({children, pathname}) => {
+const Layout = () => {
+  const navigation = useNavigation();
   return (
     <>
       <TopBar />
       <NavBar />
-      <Breadcrumb pathname={pathname} />
-      {children}
+      <Breadcrumb />
+      {navigation.state !== "idle" && <Spinner />}
+      <Outlet />
       <Footer />
     </>
   );

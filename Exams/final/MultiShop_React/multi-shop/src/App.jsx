@@ -1,43 +1,36 @@
-import CategoryList from "./components/Categories/CategoryList";
-import Layout from "./components/Layout/Layout";
-import FeaturedProducts from "./components/Products/FeaturedProducts";
-import ProductSidebar from "./components/Products/ProductSidebar";
-import Container from "./components/Layout/Container";
-import ProductsByCategory from "./components/Products/ProductsByCategory";
-import ProductDetail from "./components/Products/ProductDetail";
 import { ProductContextProvider } from "./store/product-context";
+import { createBrowserRouter, RouterProvider } from "react-router";
+import Layout from "./components/Layout/Layout";
+import HomePage from "./pages/HomePage";
+import CategoriesPage from "./pages/CategoriesPage";
+import ProductsByCategoryPage from "./pages/ProductsByCategoryPage";
+import ProductDetailPage from "./pages/ProductDetailPage";
+import ContactPage from "./pages/ContactPage";
+import { action as contactAction } from "./pages/ContactPage";
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    Component: Layout,
+    errorElement: <p>The page could not be found.</p>,
+    children: [
+      { index: true, Component: HomePage },
+      { path: "categories", Component: CategoriesPage },
+      {
+        path: "products/category/:categoryname",
+        Component: ProductsByCategoryPage,
+      },
+      { path: "products/:productid", Component: ProductDetailPage },
+      { path: "contact", Component: ContactPage, action: contactAction },
+    ],
+  },
+]);
 
 function App() {
-  const pathname = window.location.pathname;
-
-  // Regex check for pathname to match /products/category/[category-name]
-  const categoryMatch = pathname.match(/^\/products\/category\/(.+)$/);
-  const productMatch = pathname.match(/^\/products\/(\d+)$/);
-
-  
-
   return (
-    <>
-      <ProductContextProvider>
-        <Layout pathname={pathname}>
-          {pathname === "/" && <FeaturedProducts />}
-          {pathname === "/categories" && <CategoryList />}
-          {categoryMatch && (
-            <Container className="container-fluid">
-              <Container className="row px-xl-5">
-                <ProductSidebar />
-                <ProductsByCategory categoryName={categoryMatch[1]} />
-              </Container>
-            </Container>
-          )}
-          {productMatch && (
-            <>
-              <ProductDetail productId={productMatch[1]} />
-            </>
-          )}
-        </Layout>
-      </ProductContextProvider>
-    </>
+    <ProductContextProvider>
+      <RouterProvider router={router} />
+    </ProductContextProvider>
   );
 }
 

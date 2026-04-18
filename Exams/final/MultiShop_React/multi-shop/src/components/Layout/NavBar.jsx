@@ -1,4 +1,5 @@
 import CategoryMenu from "../Categories/CategoryMenu";
+import { NavLink } from "react-router";
 
 
 function NavBar() {
@@ -29,35 +30,18 @@ function NavBar() {
               id="navbarCollapse"
             >
               <div className="navbar-nav mr-auto py-0">
-                <a href="/" className="nav-item nav-link active">
+                <NavLink to="/" end className={({isActive}) => isActive ? "nav-item nav-link active" : "nav-item nav-link"}>
                   Home
-                </a>
-                <a href="/categories" className="nav-item nav-link">
+                </NavLink>
+                <NavLink to="/categories" className={({isActive}) => isActive ? "nav-item nav-link active" : "nav-item nav-link"}>
                   Shop
-                </a>
-                <a href="/shop" className="nav-item nav-link">
-                  Shop Detail
-                </a>
-                <div className="nav-item dropdown">
-                  <a
-                    href="#"
-                    className="nav-link dropdown-toggle"
-                    data-toggle="dropdown"
-                  >
-                    Pages <i className="fa fa-angle-down mt-1"></i>
-                  </a>
-                  <div className="dropdown-menu bg-primary rounded-0 border-0 m-0">
-                    <a href="cart.html" className="dropdown-item">
-                      Shopping Cart
-                    </a>
-                    <a href="checkout.html" className="dropdown-item">
-                      Checkout
-                    </a>
-                  </div>
-                </div>
-                <a href="contact.html" className="nav-item nav-link">
+                </NavLink>
+                <NavLink to="/cart" className={({isActive}) => isActive ? "nav-item nav-link active" : "nav-item nav-link"}>
+                  Shopping Cart
+                </NavLink>
+                <NavLink to="/contact" className={({isActive}) => isActive ? "nav-item nav-link active" : "nav-item nav-link"}>
                   Contact
-                </a>
+                </NavLink>
               </div>
               <div className="navbar-nav ml-auto py-0 d-none d-lg-block">
                 <a href="" className="btn px-0">

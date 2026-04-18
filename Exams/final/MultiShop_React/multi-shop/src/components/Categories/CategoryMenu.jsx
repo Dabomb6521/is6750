@@ -1,4 +1,5 @@
 import { useContext } from "react";
+import { Link } from "react-router";
 import { ProductContext } from "../../store/product-context";
 
 const CategoryMenu = () => {
@@ -30,13 +31,13 @@ const CategoryMenu = () => {
 
           {!loading &&
             categories.map((category) => (
-              <a
+              <Link
                 key={category.slug}
-                href={`/products/category/${category.slug}`}
+                to={`/products/category/${category.slug}`}
                 className="nav-item nav-link"
               >
                 {category.name}
-              </a>
+              </Link>
             ))}
         </div>
       </nav>

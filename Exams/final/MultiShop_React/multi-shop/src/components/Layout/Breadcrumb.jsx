@@ -1,8 +1,10 @@
 import { useContext } from "react";
+import { useLocation } from "react-router";
 import { ProductContext } from "../../store/product-context";
 import { formatCategoryName } from "../../utils/formatters";
 
-const Breadcrumb = ({ pathname }) => {
+const Breadcrumb = () => {
+  const { pathname } = useLocation();
   const { getProduct } = useContext(ProductContext);
 
   const getBreadcrumbItems = () => {

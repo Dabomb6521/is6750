@@ -1,4 +1,5 @@
 import { useContext } from "react";
+import { Link } from "react-router";
 import { ProductContext } from "../../store/product-context";
 import { formatCategoryName } from "../../utils/formatters";
 
@@ -21,9 +22,9 @@ const CategoryList = () => {
               key={category.name}
               className="col-lg-3 col-md-4 col-sm-6 pb-1"
             >
-              <a
+              <Link
                 className="text-decoration-none"
-                href={`/products/category/${category.slug}`}
+                to={`/products/category/${category.slug}`}
               >
                 <div className="cat-item d-flex align-items-center mb-4">
                   <div
@@ -43,7 +44,7 @@ const CategoryList = () => {
                     </small>
                   </div>
                 </div>
-              </a>
+              </Link>
             </div>
           ))}
       </div>
