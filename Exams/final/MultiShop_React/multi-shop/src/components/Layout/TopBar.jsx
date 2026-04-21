@@ -1,6 +1,8 @@
-import { Link } from "react-router";
+import { Link, useRouteLoaderData } from "react-router";
 
 function TopBar() {
+  const userData = useRouteLoaderData("root")
+
   return (
     <div className="container-fluid">
       <div className="row bg-secondary py-1 px-xl-5">
@@ -28,15 +30,24 @@ function TopBar() {
                 className="btn btn-sm btn-light dropdown-toggle"
                 data-toggle="dropdown"
               >
-                My Account
+                {userData ? `Welcome, ${userData.firstName}!` : "My Account"}
               </button>
               <div className="dropdown-menu dropdown-menu-right">
-                <Link className="dropdown-item" to="/login">
-                  Sign in
-                </Link>
-                <Link className="dropdown-item" to="/signup">
-                  Sign up
-                </Link>
+                {!userData && (
+                  <>
+                    <Link className="dropdown-item" to="/login">
+                      Sign in
+                    </Link>
+                    <Link className="dropdown-item" to="/signup">
+                      Sign up
+                    </Link>
+                  </>
+                )}
+                {userData && (
+                  <Link className="dropdown-item" to="/logout">
+                    Sign out
+                  </Link>
+                )}
               </div>
             </div>
             <div className="btn-group mx-2">
