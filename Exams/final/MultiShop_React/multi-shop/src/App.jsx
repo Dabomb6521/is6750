@@ -7,6 +7,10 @@ import ProductsByCategoryPage from "./pages/ProductsByCategoryPage";
 import ProductDetailPage from "./pages/ProductDetailPage";
 import ContactPage from "./pages/ContactPage";
 import { action as contactAction } from "./pages/ContactPage";
+import SignUpPage from "./pages/SignUpPage";
+import { action as signupAction } from "./pages/SignUpPage";
+import LoginPage from "./pages/LoginPage";
+import { action as loginAction } from "./pages/LoginPage";
 
 const router = createBrowserRouter([
   {
@@ -22,6 +26,8 @@ const router = createBrowserRouter([
       },
       { path: "products/:productid", Component: ProductDetailPage },
       { path: "contact", Component: ContactPage, action: contactAction },
+      { path: "signup", Component: SignUpPage, action: signupAction },
+      { path: "login", Component: LoginPage, action: loginAction },
     ],
   },
 ]);

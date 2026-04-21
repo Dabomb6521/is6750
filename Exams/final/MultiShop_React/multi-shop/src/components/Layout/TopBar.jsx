@@ -1,3 +1,5 @@
+import { Link } from "react-router";
+
 function TopBar() {
   return (
     <div className="container-fluid">
@@ -29,12 +31,12 @@ function TopBar() {
                 My Account
               </button>
               <div className="dropdown-menu dropdown-menu-right">
-                <button className="dropdown-item" type="button">
+                <Link className="dropdown-item" to="/login">
                   Sign in
-                </button>
-                <button className="dropdown-item" type="button">
+                </Link>
+                <Link className="dropdown-item" to="/signup">
                   Sign up
-                </button>
+                </Link>
               </div>
             </div>
             <div className="btn-group mx-2">
