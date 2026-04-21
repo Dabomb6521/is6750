@@ -8,15 +8,21 @@ import ProductDetailPage from "./pages/ProductDetailPage";
 import ContactPage from "./pages/ContactPage";
 import { action as contactAction } from "./pages/ContactPage";
 import SignUpPage from "./pages/SignUpPage";
-import { action as signupAction } from "./pages/SignUpPage";
 import LoginPage from "./pages/LoginPage";
-import { action as loginAction } from "./pages/LoginPage";
+import {
+  signupAction,
+  loginAction,
+  logoutLoader,
+  authStatusLoader,
+} from "./utils/auth";
 
 const router = createBrowserRouter([
   {
     path: "/",
+    id: "root",
     Component: Layout,
     errorElement: <p>The page could not be found.</p>,
+    loader: authStatusLoader,
     children: [
       { index: true, Component: HomePage },
       { path: "categories", Component: CategoriesPage },
@@ -28,6 +34,7 @@ const router = createBrowserRouter([
       { path: "contact", Component: ContactPage, action: contactAction },
       { path: "signup", Component: SignUpPage, action: signupAction },
       { path: "login", Component: LoginPage, action: loginAction },
+      { path: "logout", loader: logoutLoader },
     ],
   },
 ]);
