@@ -15,6 +15,7 @@ import {
   logoutLoader,
   authStatusLoader,
 } from "./utils/auth";
+import ShoppingCartPage from "./pages/ShoppingCartPage";
 
 const router = createBrowserRouter([
   {
@@ -34,6 +35,7 @@ const router = createBrowserRouter([
       { path: "contact", Component: ContactPage, action: contactAction },
       { path: "signup", Component: SignUpPage, action: signupAction },
       { path: "login", Component: LoginPage, action: loginAction },
+      { path: "cart", Component: ShoppingCartPage},
       { path: "logout", loader: logoutLoader },
     ],
   },

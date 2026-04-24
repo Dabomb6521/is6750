@@ -1,6 +1,6 @@
 import { createContext, useEffect, useState } from "react";
 
-const CartContext = createContext({
+export const CartContext = createContext({
   items: [],
   numItems: 0,
   subtotal: 0,
@@ -36,7 +36,7 @@ export const CartContextProvider = ({ children }) => {
       let updated;
       if (existing) {
         updated = prev.map((i) =>
-          i.id === item.id ? { ...i, quantity: i.quantity + item.quantity } : 1,
+          i.id === item.id ? { ...i, quantity: i.quantity + item.quantity } : i,
         );
       } else {
         updated = [...prev, item];
@@ -48,7 +48,7 @@ export const CartContextProvider = ({ children }) => {
 
   const removeItem = (itemId) => {
     setItems((prev) => {
-      const updated = prev.filter((i) => i.id !== itemId);
+      const updated = prev.filter((i) => i.id !== itemId );
       sessionStorage.setItem("cartItems", JSON.stringify(updated));
       return updated;
     });
@@ -57,7 +57,7 @@ export const CartContextProvider = ({ children }) => {
   const updateItemQuantity = (itemId, newQuantity) => {
     setItems((prev) => {
       const updated = prev.map((i) =>
-        i.id === itemId ? { ...1, quantity: newQuantity } : 1,
+        i.id === itemId ? { ...i, quantity: newQuantity } : i,
       );
       sessionStorage.setItem("cartItems", JSON.stringify(updated));
       return updated;
@@ -66,7 +66,7 @@ export const CartContextProvider = ({ children }) => {
 
   const resetCart = () => {
     setItems([]);
-    sessionStorage.removeItem("cartItem");
+    sessionStorage.removeItem("cartItems");
   };
 
   const contextValue = {

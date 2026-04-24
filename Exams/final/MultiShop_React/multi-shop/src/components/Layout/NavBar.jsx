@@ -1,8 +1,11 @@
+import { useContext } from "react";
 import CategoryMenu from "../Categories/CategoryMenu";
-import { NavLink } from "react-router";
+import { NavLink, Link } from "react-router";
+import { CartContext} from "../../store/cart-context"
 
 
 function NavBar() {
+  const {numItems} = useContext(CartContext)
   return (
     <div className="container-fluid bg-dark mb-30">
       <div className="row px-xl-5">
@@ -53,15 +56,15 @@ function NavBar() {
                     0
                   </span>
                 </a>
-                <a href="" className="btn px-0 ml-3">
+                <Link to="/cart" className="btn px-0 ml-3">
                   <i className="fas fa-shopping-cart text-primary"></i>
                   <span
                     className="badge text-secondary border border-secondary rounded-circle"
                     style={{ paddingBottom: "2px" }}
                   >
-                    0
+                    {numItems}
                   </span>
-                </a>
+                </Link>
               </div>
             </div>
           </nav>

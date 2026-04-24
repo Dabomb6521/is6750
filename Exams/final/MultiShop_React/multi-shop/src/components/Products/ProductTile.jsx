@@ -1,6 +1,22 @@
+import { useContext } from "react";
 import { Link } from "react-router";
+import { CartContext } from "../../store/cart-context";
+
 
 const ProductTile = ({ product, colClasses }) => {
+const {addItem} = useContext(CartContext)
+
+const handleAddToCart = (e) => {
+  e.preventDefault();
+  addItem({
+    id: product.id,
+    title: product.title,
+    price: product.price,
+    thumbnail: product.thumbnail,
+    quantity:1,
+  })
+}
+
   const calculateOriginalPrice = (price, discountPercentage) => {
     if (!discountPercentage) return null;
 
@@ -19,9 +35,9 @@ const ProductTile = ({ product, colClasses }) => {
         <div className="product-img position-relative overflow-hidden">
           <img className="img-fluid w-100" src={product.thumbnail} alt={product.title} />
           <div className="product-action">
-            <a className="btn btn-outline-dark btn-square" href="">
+            <Link className="btn btn-outline-dark btn-square" to="#" onClick={handleAddToCart}>
               <i className="fa fa-shopping-cart"></i>
-            </a>
+            </Link>
             <a className="btn btn-outline-dark btn-square" href="">
               <i className="far fa-heart"></i>
             </a>
