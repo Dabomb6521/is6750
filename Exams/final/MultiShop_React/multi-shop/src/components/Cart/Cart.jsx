@@ -1,11 +1,12 @@
 import { useContext } from "react";
-import { Link, useRouteLoaderData } from "react-router";
+import { Link } from "react-router";
+import { useSelector } from "react-redux";
 import { CartContext } from "../../store/cart-context";
 
 const Cart = () => {
   const { items, subtotal, shipping, total, removeItem, updateItemQuantity } =
     useContext(CartContext);
-  const userData = useRouteLoaderData("root");
+  const userData = useSelector((state) => state.auth.userData);
 
   if (items.length === 0) {
     return (
@@ -55,7 +56,9 @@ const Cart = () => {
                       className="form-control form-control-sm bg-secondary border-0 text-center"
                       style={{ width: 80 }}
                       value={item.quantity}
-                      onChange={(e) => updateItemQuantity(item.id, parseInt(e.target.value))}
+                      onChange={(e) =>
+                        updateItemQuantity(item.id, parseInt(e.target.value))
+                      }
                     />
                   </td>
                   <td className="align-middle">
@@ -107,9 +110,12 @@ const Cart = () => {
                 <h5>${total.toFixed(2)}</h5>
               </div>
               {userData ? (
-                <button className="btn btn-block btn-primary font-weight-bold my-3 py-3">
+                <Link
+                  to="/checkout"
+                  className="btn btn-block btn-primary font-weight-bold my-3 py-3"
+                >
                   Proceed To Checkout
-                </button>
+                </Link>
               ) : (
                 <p className="text-center mt-3">
                   Please <Link to="/login">log in</Link> or{" "}

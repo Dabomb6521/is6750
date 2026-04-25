@@ -5,8 +5,7 @@ import HomePage from "./pages/HomePage";
 import CategoriesPage from "./pages/CategoriesPage";
 import ProductsByCategoryPage from "./pages/ProductsByCategoryPage";
 import ProductDetailPage from "./pages/ProductDetailPage";
-import ContactPage from "./pages/ContactPage";
-import { action as contactAction } from "./pages/ContactPage";
+import ContactPage, { action as contactAction } from "./pages/ContactPage";
 import SignUpPage from "./pages/SignUpPage";
 import LoginPage from "./pages/LoginPage";
 import {
@@ -16,32 +15,87 @@ import {
   authStatusLoader,
 } from "./utils/auth";
 import ShoppingCartPage from "./pages/ShoppingCartPage";
-
-const router = createBrowserRouter([
-  {
-    path: "/",
-    id: "root",
-    Component: Layout,
-    errorElement: <p>The page could not be found.</p>,
-    loader: authStatusLoader,
-    children: [
-      { index: true, Component: HomePage },
-      { path: "categories", Component: CategoriesPage },
-      {
-        path: "products/category/:categoryname",
-        Component: ProductsByCategoryPage,
-      },
-      { path: "products/:productid", Component: ProductDetailPage },
-      { path: "contact", Component: ContactPage, action: contactAction },
-      { path: "signup", Component: SignUpPage, action: signupAction },
-      { path: "login", Component: LoginPage, action: loginAction },
-      { path: "cart", Component: ShoppingCartPage},
-      { path: "logout", loader: logoutLoader },
-    ],
-  },
-]);
+import { useContext } from "react";
+import { CartContext } from "./store/cart-context";
+import CheckoutPage, { action as checkoutAction } from "./pages/CheckoutPage";
 
 function App() {
+  const cartContext = useContext(CartContext);
+
+  const router = createBrowserRouter([
+    {
+      path: "/",
+      id: "root",
+      Component: Layout,
+      errorElement: <p>The page could not be found.</p>,
+      loader: authStatusLoader,
+      children: [
+        { index: true, Component: HomePage },
+        {
+          path: "categories",
+          lazy: async () => {
+            const module = await import("./pages/CategoriesPage");
+            return { Component: module.default };
+          },
+        },
+        {
+          path: "products/category/:categoryname",
+          lazy: async () => {
+            const module = await import("./pages/ProductsByCategoryPage");
+            return { Component: module.default };
+          },
+        },
+        {
+          path: "products/:productid",
+          lazy: async () => {
+            const module = await import("./pages/ProductDetailPage");
+            return { Component: module.default };
+          },
+        },
+        {
+          path: "contact",
+          action: contactAction,
+          lazy: async () => {
+            const module = await import("./pages/ContactPage");
+            return { Component: module.default };
+          },
+        },
+        {
+          path: "signup",
+          action: signupAction,
+          lazy: async () => {
+            const module = await import("./pages/SignUpPage");
+            return { Component: module.default };
+          },
+        },
+        {
+          path: "login",
+          action: loginAction,
+          lazy: async () => {
+            const module = await import("./pages/LoginPage");
+            return { Component: module.default };
+          },
+        },
+        {
+          path: "cart",
+          lazy: async () => {
+            const module = await import("./pages/ShoppingCartPage");
+            return { Component: module.default };
+          },
+        },
+        {
+          path: "checkout",
+          action: checkoutAction(cartContext),
+          lazy: async () => {
+            const module = await import("./pages/CheckoutPage");
+            return { Component: module.default };
+          },
+        },
+      ],
+    },
+    { path: "logout", loader: logoutLoader },
+  ]);
+
   return (
     <ProductContextProvider>
       <RouterProvider router={router} />

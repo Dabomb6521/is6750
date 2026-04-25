@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { action } from "../pages/ContactPage";
 
 const raw = localStorage.getItem("userData");
 const savedUser = raw ? JSON.parse(raw) : null;
@@ -11,10 +10,10 @@ const authSlice = createSlice({
   name: "auth",
   reducers: {
     setUser(state, action) {
-      state.userData = null;
+      state.userData = action.payload;
     },
     clearUser(state) {
-      state.userData = action.payload;
+      state.userData = null;
     }
   },
 });
