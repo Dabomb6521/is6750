@@ -31,21 +31,27 @@ const CheckoutForm = () => {
             <div className="bg-light p-30 mb-5">
               <div className="row">
                 <div className="col-md-6 form-group">
-                  <label>Mobile No</label>
+                  <label>
+                    Mobile No <span style={{ color: "red" }}>*</span>
+                  </label>
                   <input
                     className="form-control"
                     type="text"
                     name="billingPhone"
                     placeholder="+123 456 789"
+                    required
                   />
                 </div>
                 <div className="col-md-6 form-group">
-                  <label>Address Line 1</label>
+                  <label>
+                    Address Line 1 <span style={{ color: "red" }}>*</span>
+                  </label>
                   <input
                     className="form-control"
                     type="text"
                     name="billingAddress1"
                     placeholder="123 Street"
+                    required
                   />
                 </div>
                 <div className="col-md-6 form-group">
@@ -67,30 +73,39 @@ const CheckoutForm = () => {
                   </select>
                 </div>
                 <div className="col-md-6 form-group">
-                  <label>City</label>
+                  <label>
+                    City <span style={{ color: "red" }}>*</span>
+                  </label>
                   <input
                     className="form-control"
                     type="text"
                     name="billingCity"
                     placeholder="New York"
+                    required
                   />
                 </div>
                 <div className="col-md-6 form-group">
-                  <label>State</label>
+                  <label>
+                    State <span style={{ color: "red" }}>*</span>
+                  </label>
                   <input
                     className="form-control"
                     type="text"
                     name="billingState"
                     placeholder="New York"
+                    required
                   />
                 </div>
                 <div className="col-md-6 form-group">
-                  <label>ZIP Code</label>
+                  <label>
+                    ZIP Code <span style={{ color: "red" }}>*</span>
+                  </label>
                   <input
                     className="form-control"
                     type="text"
                     name="billingZip"
                     placeholder="123"
+                    required
                   />
                 </div>
                 <div className="col-md-12">
@@ -121,34 +136,9 @@ const CheckoutForm = () => {
               <div className="bg-light p-30">
                 <div className="row">
                   <div className="col-md-6 form-group">
-                    <label>First Name</label>
-                    <input
-                      className="form-control"
-                      type="text"
-                      name="shippingFirstName"
-                      placeholder="John"
-                    />
-                  </div>
-                  <div className="col-md-6 form-group">
-                    <label>Last Name</label>
-                    <input
-                      className="form-control"
-                      type="text"
-                      name="shippingLastName"
-                      placeholder="Doe"
-                    />
-                  </div>
-                  <div className="col-md-6 form-group">
-                    <label>E-mail</label>
-                    <input
-                      className="form-control"
-                      type="email"
-                      name="shippingEmail"
-                      placeholder="example@email.com"
-                    />
-                  </div>
-                  <div className="col-md-6 form-group">
-                    <label>Mobile No</label>
+                    <label>
+                      Mobile No <span style={{ color: "red" }}>*</span>
+                    </label>
                     <input
                       className="form-control"
                       type="text"
@@ -157,7 +147,9 @@ const CheckoutForm = () => {
                     />
                   </div>
                   <div className="col-md-6 form-group">
-                    <label>Address Line 1</label>
+                    <label>
+                      Address Line 1 <span style={{ color: "red" }}>*</span>
+                    </label>
                     <input
                       className="form-control"
                       type="text"
@@ -184,7 +176,9 @@ const CheckoutForm = () => {
                     </select>
                   </div>
                   <div className="col-md-6 form-group">
-                    <label>City</label>
+                    <label>
+                      City <span style={{ color: "red" }}>*</span>
+                    </label>
                     <input
                       className="form-control"
                       type="text"
@@ -193,7 +187,9 @@ const CheckoutForm = () => {
                     />
                   </div>
                   <div className="col-md-6 form-group">
-                    <label>State</label>
+                    <label>
+                      State <span style={{ color: "red" }}>*</span>
+                    </label>
                     <input
                       className="form-control"
                       type="text"
@@ -202,7 +198,9 @@ const CheckoutForm = () => {
                     />
                   </div>
                   <div className="col-md-6 form-group">
-                    <label>ZIP Code</label>
+                    <label>
+                      ZIP Code <span style={{ color: "red" }}>*</span>
+                    </label>
                     <input
                       className="form-control"
                       type="text"
@@ -259,6 +257,7 @@ const CheckoutForm = () => {
                       name="payment"
                       id="paypal"
                       value="paypal"
+                      required
                     />
                     <label className="custom-control-label" htmlFor="paypal">
                       Paypal
@@ -273,6 +272,7 @@ const CheckoutForm = () => {
                       name="payment"
                       id="directcheck"
                       value="directcheck"
+                      required
                     />
                     <label
                       className="custom-control-label"
@@ -290,6 +290,7 @@ const CheckoutForm = () => {
                       name="payment"
                       id="banktransfer"
                       value="banktransfer"
+                      required
                     />
                     <label
                       className="custom-control-label"
